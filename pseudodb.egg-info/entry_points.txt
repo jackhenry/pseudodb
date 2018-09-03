@@ -1,0 +1,3 @@
+[console_scripts]
+pseudodb = pseudodb.command:main
+
