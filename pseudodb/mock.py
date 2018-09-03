@@ -40,17 +40,17 @@ class Mock(object):
 
         def get_first_name():
             with open(FIRST_NAMES) as fn:
-                names = json.load(fn)['first']
+                first_names = json.load(fn)['first']
 
-            random_index = random.randint(1, len(names) + 1)
-            return names[random_index]
+            random_index = random.randint(1, len(first_names) + 1)
+            return first_names[random_index]
 
         def get_last_name():
             with open(LAST_NAMES) as ln:
-                names = json.load(ln)['last']
+                last_names = json.load(ln)['last']
 
-            random_index = random.randint(1, len(names) + 1)
-            return names[random_index]
+            random_index = random.randint(1, len(last_names) + 1)
+            return last_names[random_index]
 
         if name_type is Name.FIRST:
             random_name = get_first_name()

@@ -13,9 +13,16 @@ def pseudodb():
     """Create mock Sqlite tables for testing """
     pass
 
-@pseudodb.command()
-@click.argument('path', required=True)
+@pseudodb.command(options_metavar='')
+@click.argument('path', required=True, metavar='<path>')
 def new(path):
+    """
+    Create new db file.
+    
+    Path is full path to new db file including file name
+    
+    Example: pseudodb new C:/User/John/DB/mysqlite.db
+    """
     set_config('db_path', path)
     def after_creation(path):
         print("""
@@ -34,7 +41,11 @@ def new(path):
 @click.option('--path')
 @click.option('--rows')
 def create(name, headers, types, path, rows):
-
+    """
+    Create a new mock table
+    
+    Example:
+    """
     if path is not None:
         set_config('db_path', path)
 
