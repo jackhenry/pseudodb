@@ -4,3 +4,4 @@
 *.db
 /build
 /dist
+/pseudodb.egg-info
