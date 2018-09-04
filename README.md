@@ -23,7 +23,7 @@ Use the create argument to create a mock table. The table will be created in the
 ```
 pseudodb create my_mock_table FIRST_NAME,LAST_NAME,BIRTHDAY,SALARY firstname,lastname,date,dollars --rows=250
 ```
-* my_mock_table - This argument is the name the table will be given
-* FIRST_NAME,LAST_NAME,BIRTHDAY,SALARY - Indicates the table will have 4 columns with those names. Names are delimited by columns
-* firstname,lastname,date,dollars - These are mock types. This will tell pseudodb what kind of values to randomly generate
-* --rows - The ammount of rows with random data the table will contain
+* **my_mock_table** - This argument is the name the table will be given
+* **FIRST_NAME,LAST_NAME,BIRTHDAY,SALARY** - Indicates the table will have 4 columns with those names. Names are delimited by columns
+* **firstname,lastname,date,dollars** - These are mock types. This will tell pseudodb what kind of values to randomly generate
+* **--rows**- The amount of rows with random data the table will contain **(optional)**
