@@ -6,12 +6,12 @@ Sometimes you just need a table of data. Maybe you are testing an algorithm, lea
 
 ## Installing
 (pip package coming soon)
-'''
+```
 git clone https://github.com/jackhenry/pseudodb
 cd pseudodb
 pip install -r requirements.txt
 python setup.py install
-'''
+```
 
 ## Usage
 
