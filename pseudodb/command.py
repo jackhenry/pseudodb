@@ -6,7 +6,8 @@ from .config import set_config
 from .exceptions import InvalidInput
 
 def get_app():
-    return Pseudodb()
+    app = Pseudodb()
+    return app
 
 @click.group()
 def pseudodb():
@@ -15,9 +16,9 @@ def pseudodb():
 
 @pseudodb.command(options_metavar='')
 @click.argument('path', required=True, metavar='<path>')
-def new(path):
+def use(path):
     """
-    Create new db file.
+    Select .db file to use. Will create a new one if path doesn't exist
     
     Path is full path to new db file including file name
     

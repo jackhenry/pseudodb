@@ -1,22 +1,27 @@
+import logging
 import os
 import yaml
 from schema import Use, Schema, SchemaError, Optional
+
+logger = logging.getLogger(__name__)
 
 class InvalidConfig(Exception):
     pass
 
 default_config = {
     'db_path': '/mock.db',
-    'row_count': 100
+    'row_count': 100,
+    'logging': 0
 }
 schema = Schema({
     'db_path': Use(str),
-    'row_count': Use(int)
+    'row_count': Use(int),
+    'logging': Use(int)
 })
 
 def get_config_path():
-    config_folder = os.path.expanduser('~')
-    config_path = os.path.join(config_folder, 'pseudodb.yaml')
+    cwd = os.getcwd()
+    config_path = os.path.join(cwd, 'pseudodb.yaml')
     return config_path
 
 def load_config():
@@ -35,13 +40,14 @@ def load_config():
     except FileNotFoundError:
         config = default_config
 
-    print(config)
-    
+    logger.debug('config loaded: %s' % config)
+
     return schema.validate(config)
 
 def save_config(config):
     with open(get_config_path(), 'w') as c_file:
         yaml.dump(config, c_file)
+        logger.debug('config saved to %s' % get_config_path())
 
 def set_config(key, value):
     config = load_config()

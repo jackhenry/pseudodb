@@ -1,3 +1,5 @@
+import logging
+
 from functools import partial
 
 from .config import load_config
@@ -8,6 +10,8 @@ from .operations import (
     create_mock
 )
 
+logger = logging.getLogger(__name__)
+
 class Operations(object):
     def __init__(self, db_path):
         self.create_new_db = partial(create_new_db, db_path)
@@ -17,11 +21,18 @@ class Operations(object):
 
 class Pseudodb(object):
     def __init__(self):
+        logger.debug('Pseudodb() initialized')
         self.load_config()
-        self.operations = Operations(self.config['db_path'])
+        self.init_operations()
 
     def load_config(self):
+        print('loading config')
         self.config = load_config()
+        logging.basicConfig(level=self.config['logging'])
+
+    def init_operations(self):
+        self.operations = Operations(self.config['db_path'])
+        
 
     def create_new_db(self, after_creation=None):
         self.operations.create_new_db()

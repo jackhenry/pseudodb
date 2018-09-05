@@ -1,3 +1,4 @@
+import logging
 import sqlite3
 import records
 import os
@@ -5,6 +6,9 @@ import sys
 
 from .mock import Mock
 from .exceptions import TableExists
+
+logger = logging.getLogger(__name__)
+
 """
 All queries passed here where they are executed.
 """
@@ -18,6 +22,7 @@ def run_query(db_path, query):
 Create new db file
 """
 def create_new_db(db_path):
+    exists = os.path.isfile(db_path)
     try:
         connection = sqlite3.connect(db_path)
         connection.close()
@@ -25,6 +30,13 @@ def create_new_db(db_path):
         print("Could not create database with path %s" % db_path)
         print("Double check the path and try again")
         sys.exit(1)
+
+    if exists:
+        print('Successfully Connected')
+        logger.debug('Connected to DB at path %s' % db_path)
+    else:
+        print('Successfully Created')
+        logger.debug('Created DB at path %s' % db_path)
 
 """
 Create table with name of passed argument. Create a ID field as a primary key. 
@@ -52,10 +64,11 @@ def create_table(db_path, name):
             '''
 
     if table_exists(db_path, name):
-        raise TableExists("Table %s already exists. Please delete if you would like to create a new table with that name." % name)
+        print("Table exists. Pseudodb will not delete existing tables for you. Please delete table if you would like a new one with that name.")
         sys.exit(1)
     else:
         run_query(db_path, query % name)
+        logger.debug('Successfully created new table.')
 
 """
 Create single column in table with name and type
@@ -65,7 +78,7 @@ def create_column(db_path, tbl_name, col_name, col_type):
                 ALTER TABLE %s
                 ADD %s %s
             '''
-
+    
     run_query(db_path, query % (tbl_name, col_name, col_type))
 
 """
