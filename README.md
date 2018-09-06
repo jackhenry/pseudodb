@@ -5,13 +5,15 @@ Generate mock sqlite tables quickly.
 Sometimes you just need a table of data. Maybe you are testing an algorithm, learning a new library or need a stand-in. pseudodb is a simple command line tool that creates mock sqlite tables. You can specify the column names, the type of data in each column and the ammount of rows in the table.
 
 ## Installing
-(pip package coming soon)
 ```
 git clone https://github.com/jackhenry/pseudodb
 cd pseudodb
 pip install -r requirements.txt
 python setup.py install
 ```
+I will not be putting this on PyPi because I don't want to clog the namespace.
+
+**Only tested on Python 3.6 & 3.7**
 
 ## Usage
 Use the new argument to specify the .db file you would like to create the mock tables in. This will create a new .db file if the file does not already exist. **IMPORTANT** Make sure your path ends with the name of the db file.
