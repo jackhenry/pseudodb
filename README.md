@@ -16,7 +16,7 @@ python setup.py install
 ## Usage
 Use the new argument to specify the .db file you would like to create the mock tables in. This will create a new .db file if the file does not already exist. **IMPORTANT** Make sure your path ends with the name of the db file.
 ```
-pseudodb new ~/mock.db
+pseudodb use ~/mock.db
 ```
 
 Use the create argument to create a mock table. The table will be created in the .db file you specified with the new argument. 
